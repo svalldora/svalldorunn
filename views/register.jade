@@ -2,38 +2,92 @@ extends layout
 
 block content
   
-  if (error == true)
-    p(class='alert alert-danger') Notendanafn þegar til!
-  if(nousername == true)
-    p(class='alert alert-danger') Notendanafn vantar!
-  if(nopassword == true)
-    p(class='alert alert-danger') Lykilorð vantar!
   if (registered == true) 
     p(class='alert alert-success') Skráning tókst!!!
   
   else
   
-    form.form-group(method="post")
+    form.form-group.col-md-8(method="post")
     
-        label(for="username") Notendanafn:
-        input(id="username" 
-          type="text" 
-          placeholder="notendanafn" 
-          name="username"
-          class="form-control"
-          )
-        br
-
-        label(for="password") Lykilorð:
-        input(id="password" 
-          type="password" 
-          name="password" 
-          placeholder="lykilorð"
-          class="form-control"
-          )
-        br
+      label Nafn:
+      input(
+        value= nameput
+        type='text'
+        name='heiti'
+        id='nafn'
+        class='form-control'
+        placeholder='Jón Jónson'
+        )
+      br
+      if (nameerror == false)
+        p(class='alert alert-danger') Villa í nafni!
           
-        button(type='submit'
-              value='submit'
-              class='btn btn-success'
-              ) Nýskrá
+      label Netfang:
+      input(
+        value= emailput
+        type='text'
+        name='email'
+        id='email'
+        class='form-control'
+        placeholder='jon@jonsson.is'
+        )
+      br
+      if (emailerror === false)
+        p(class='alert alert-danger') Villa í e-maili!
+      if (emerror === true)
+        p(class='alert alert-danger') E-mail þegar skráð!
+  
+      label(for="username") Notendanafn:
+      input(
+        value= usernameput
+        id="username" 
+        type="text" 
+        placeholder="notendanafn" 
+        name="username"
+        class="form-control"
+        )
+      br
+      if(nousername == true)
+        p(class='alert alert-danger') Notendanafn vantar!
+      if (usernameerror == true)
+        p(class='alert alert-danger') Notendanafn þegar til!
+
+      label(for="password") Lykilorð:
+      input(
+        id="password" 
+        type="password" 
+        name="password" 
+        placeholder="lykilorð"
+        class="form-control"
+        )
+      br
+      if(nopassword == true)
+        p(class='alert alert-danger') Lykilorð vantar!
+      
+      label(for="password") Lykilorð aftur:
+      input(
+        id="password" 
+        type="password" 
+        name="password2" 
+        placeholder="lykilorð"
+        class="form-control"
+        )
+      br
+      if(passworderror == true)
+        p(class='alert alert-danger') Lykilorð ekki eins!
+        
+      label(for="image") Hérna máttu setja link á mynd!
+      input(
+        value= imageput
+        id="image" 
+        type="text" 
+        name="image"
+        class="form-control"
+        )
+      br
+      
+        
+      button(type='submit'
+            value='submit'
+            class='btn btn-primary'
+            ) Nýskrá

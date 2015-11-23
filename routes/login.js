@@ -22,8 +22,8 @@ router.post('/', function(req, res) {
 
   var username = "SELECT * FROM users WHERE username = $1";
   var parameters = [req.body.username];
-  var clean = xss(req.body.username);
-  clean = xss(req.body.password);
+  /*var clean = xss(req.body.username);
+  clean = xss(req.body.password);*/
 
   dbUtils.queryDb(username, parameters, function(err,result) {
     if(err) {
@@ -38,7 +38,7 @@ router.post('/', function(req, res) {
       loggedin = false;
       res.render('login', {error:error,
                            loggedin:loggedin});
-      return console.error('error fetching client from pool', err);
+      return console.error('!user', err);
     }
 
     if (user) {
@@ -54,7 +54,7 @@ router.post('/', function(req, res) {
         loggedin = false;
         res.render('login', {error:error,
                              loggedin:loggedin});
-        return console.error('error fetching client from pool', err);
+        return console.error('!hashtrue', err);
       }
       // Regenerate session when signing in
       // to prevent fixation
@@ -63,7 +63,7 @@ router.post('/', function(req, res) {
         // in the session store to be retrieved,
         // or in this case the entire user object
         req.session.user = user;
-        res.redirect('entries');
+        res.redirect('/profile/'+user.username);
       });
     }
   });
